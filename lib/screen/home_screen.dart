@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:food_app/model/food_model.dart';
 import 'package:food_app/widget/grid_view_item.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -23,7 +24,13 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: size.height * 0.1),
-            GridViewItem(),
+           GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+               shrinkWrap: true,
+               physics: NeverScrollableScrollPhysics(),
+               itemCount: meals.length,
+               itemBuilder: (context,index){
+             return GridViewItem(indexItem: index,);
+               })
           ],
         ),
       ),

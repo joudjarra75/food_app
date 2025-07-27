@@ -1,15 +1,34 @@
 class FoodModel {
-  String name;
-  double price;
-  String img;
-  String description;
+  final String name;
+  final double price;
+  final String img;
+  final String description;
+  final bool isFav;
 
   FoodModel({
     required this.name,
     required this.price,
     required this.description,
     required this.img,
+    this.isFav = false
   });
+
+
+  FoodModel copyWith({
+    String? name,
+    double? price,
+    String? description,
+    String? img,
+    bool? isFav
+
+  }) {
+    return FoodModel(
+        name: name ?? this.name,
+        price: price ?? this.price,
+        description: description ?? this.description,
+        img: img ?? this.img,
+    isFav:  isFav ?? this.isFav);
+  }
 }
 
 List<FoodModel> meals = [
@@ -19,6 +38,7 @@ List<FoodModel> meals = [
     description:
         "Micah Peters: You know the scene in Scott Pilgrim vs. the World where Scott tells Ramona that, were he to have his way, he’d eat garlic bread forever without ever having to stop? I could probably do that with Chick-fil-A waffle fries. Except then I'd get fat. Fries make you fat.",
     img: "https://fastfood.theringer.com/img/items/1.jpg",
+
   ),
   FoodModel(
     name: 'Double-Double',
@@ -26,6 +46,7 @@ List<FoodModel> meals = [
     description:
         "Riley McAtee: There's one small change that can take the Double-Double from “best burger ever” to “literal perfection between two buns.” Ask for grilled onions—instead of the sliced onion—the next time you order one. It gets you halfway to Animal Style for free.",
     img: "https://fastfood.theringer.com/img/items/2.jpg",
+
   ),
   FoodModel(
     name: 'Chicken Popeyes',
@@ -40,6 +61,7 @@ List<FoodModel> meals = [
     description:
         "Hannah Giorgis: The Chick-fil-A chicken sandwich is transcendent. The perfect combination of a generous portion of breaded chicken, soft bun, and tart pickles, it's enhanced by only one thing: Polynesian sauce.",
     img: "https://fastfood.theringer.com/img/items/5.jpg",
+
   ),
   FoodModel(
     name: "Curly Fries Arby's",

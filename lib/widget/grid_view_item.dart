@@ -1,26 +1,69 @@
 import 'package:flutter/material.dart';
 
 import '../model/food_model.dart';
-import 'meal_card.dart';
 
-class GridViewItem extends StatelessWidget {
-  const GridViewItem({super.key});
+class GridViewItem extends StatefulWidget {
+  int indexItem;
+  GridViewItem({super.key, required this.indexItem});
 
   @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-      physics: NeverScrollableScrollPhysics(),
-        itemCount: meals.length,
-        itemBuilder: (context,index){
-          return MealCard(img: meals[index].img,name: meals[index].name,price: meals[index].price,) ;
-        },
-         // clipBehavior: Clip.none,
-    shrinkWrap: true,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount
-      (crossAxisCount: 2,
+  State<GridViewItem> createState() => _GridViewItemState();
+}
 
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10
-    ));
+class _GridViewItemState extends State<GridViewItem> {
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: Colors.white,
+      child: Column(
+        children: [
+          Stack(
+            clipBehavior: Clip.none,
+            children: [
+              Image.network(
+                meals[widget.indexItem].img,
+                height: 90,
+                width: 100,
+              ),
+              Positioned(
+                top: 10,
+                right: -20,
+                child: InkWell(
+                  onTap: () {
+                    setState(() {
+                      meals[widget.indexItem] = meals[widget.indexItem]
+                          .copyWith(isFav: !(meals[widget.indexItem].isFav));
+                      // print(meals[widget.indexItem].isFav);
+                    });
+                  },
+                  child: meals[widget.indexItem].isFav
+                      ? Icon(Icons.favorite,color: Colors.deepOrange,)
+                      : Icon(Icons.favorite_border),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 10),
+          Expanded(
+            child: Text(
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              meals[widget.indexItem].name,
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ),
+          SizedBox(height: 10),
+          Text(
+            r"$ "
+            "${meals[widget.indexItem].price}",
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+              color: Colors.deepOrange,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
