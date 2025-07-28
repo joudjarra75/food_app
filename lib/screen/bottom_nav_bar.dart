@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/screen/fav_screen.dart';
 import 'package:food_app/screen/home_screen.dart';
+import 'package:food_app/screen/profile_screen.dart';
 
 import '../model/food_model.dart';
 
@@ -16,13 +17,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
 Map<String,Widget> item = {
     'Home' : Icon(Icons.home),
     'Favorite' : Icon(Icons.favorite),
-    'Cart' : Icon(Icons.shopping_cart)
+    'Profile' : Icon(Icons.person)
   };
   List <Widget> screens = [
     HomeScreen(),
     // Center(child: Text("Fav"),),
    FavScreen(),
-    Center(child: Text("Cart"),),
+    ProfileScreen()
   ];
 
 int selectedIndex = 0;
@@ -35,7 +36,7 @@ void onTapFun(int index){
 
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepOrange[100],
+      // backgroundColor: Colors.white,
       // backgroundColor: Colors.pink,
       appBar: AppBar(
         title: Text("Food App"),

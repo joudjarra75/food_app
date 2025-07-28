@@ -14,6 +14,21 @@ class _FavScreenState extends State<FavScreen> {
   @override
   Widget build(BuildContext context) {
     List<FoodModel> favItem = meals.where((e) => e.isFav == true).toList();
+    if(favItem.isEmpty){
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.hourglass_empty_rounded,color: Colors.deepOrange,size: 150,),
+            SizedBox(height: 20,),
+            Text("This screen is empty!",style: TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.w500
+            ),)
+          ],
+        ),
+      );
+    }
     return Padding(
       padding: const EdgeInsets.all(16),
         child: ListView.builder(
